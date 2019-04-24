@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nomeConfigMap
+  namespace: namespace
+data:
+  POSTGRES_DB: dspace
+  POSTGRES_PASSWORD: Z@hU&E2h7knE+[=3
+  POSTGRES_USER: dspace
+
+#Segue regra de CHAVE : VALOR
+

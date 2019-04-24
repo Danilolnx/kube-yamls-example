@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nomedoIngress
+  namespace: namespace
+#Anotações do Ingress, como retirect para HTTPS e demais configurações do NGINX
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "off"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  rules:
+#Exemplo de regra direcionamento POD para um Service
+  - host: urlDoSistema
+    http:
+      paths:
+      - path: /web/ #Contexto da aplicação
+        backend:
+          serviceName: nomeDoService
+          servicePort: 8080 #Porta do Service
+#Secret com o certificado que será utilizado pela URL  
+tls:
+   - secretName: mctic.gov.br

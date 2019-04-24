@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nomedoPV
+  namespace: namespace
+spec:
+#Tamaanho do PV
+  capacity:
+    storage: 10Gi
+#Regras de acesso 
+  accessModes:
+    - ReadWriteManay
+#Metódo de conexão
+  nfs:
+    # IP do servidor de NFS - Acesso DIRETO
+    server: 10.34.0.253 
+    path: "Caminho completo do NFS - Ex.: /vol/vol_docker_PROD/prd/ciuca-prod/storage"
+    
+#NFS Produção
+#
+#   Volume: /vol/vol_docker_PROD
+#
+#NFS DevOps
+#
+#   Volume: /vol/vol_docker_DEVOPS
+#
+#NFS Pré-Produção
+#
+#   Volume: /vol/vol_docker
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nomedoPVC
+  namespace: namespace
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
