@@ -4,11 +4,6 @@
     name: epel-release
     state: present
 
-- name: Instalar Multipath
-  yum:
-    name: device-mapper-multipath
-    state: present
-
 - name: Desinstalar pacotes de docker antigos
   yum:
     name:
@@ -22,14 +17,6 @@
       - docker-engine  
     state: absent
 
-- name: Criar arquivo mpath.conf
-  shell: mpathconf --enable --with_multipathd y
-
-- name: Iniciar e habilitar servico Multipath
-  systemd:
-    name: multipathd.service
-    state: started
-    enabled: yes
 
 - name: Instalar pacote parted
   package:
@@ -88,24 +75,6 @@
       - yum-utils
       - device-mapper-persistent-data
       - lvm2
-    state: present
-
-- name: Criar repositorio docker-ce
-  copy:
-    src: /etc/ansible/roles/aeb/templates/docker-ce.repo
-    dest: /etc/yum.repos.d
-    owner: root
-    group: root
-    mode: 0644
-    state: present
-
-- name: Instalar docker-ce e compose
-  yum:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-compose
     state: present
 
 - name: Iniciar serviço do Docker
