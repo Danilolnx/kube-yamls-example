@@ -1,0 +1,24 @@
+solicitadas:
+oauthConfig:
+  assetPublicURL: https://sinvp-apps.in.local:8443/console/
+  grantConfig:
+    method: auto
+  identityProviders:
+    - challenge: true
+      login: true
+      mappingMethod: add
+      name: "ldap_provider"
+      provider:
+        apiVersion: v1
+        kind: LDAPPasswordIdentityProvider
+        attributes:
+          email:
+          - mail
+          id:
+          - sAMAccountName
+          preferredUsername:
+          - sAMAccountName
+        bindDN: "CN=svc_openshift.ldap,OU=Usuarios,OU=ESPECIAIS,OU=Imprensa,DC=in,DC=local"
+        bindPassword: "SENHA"
+        insecure: yes
+        url: "ldap://sinvp-110.in.local:389/DC=in,DC=local?sAMAccountName"
